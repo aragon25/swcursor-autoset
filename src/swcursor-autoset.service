@@ -1,0 +1,11 @@
+[Unit]
+Description=Auto-create SWcursor Xorg config if Waveshare DSI panel uses rotation=180
+After=local-fs.target
+Before=display-manager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/swcursor-autoset --service
+
+[Install]
+WantedBy=multi-user.target

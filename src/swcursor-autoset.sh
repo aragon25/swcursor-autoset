@@ -122,13 +122,13 @@ function do_check_start() {
     done
     if [ "$apt_res" != "" ]; then
       echo "Not installed apt paks: ${apt_res%?%?}! Can not continue with this script!"
-      exit 1
+      exit 0
     fi
   fi
   unset IFS
   if [ ! -f "$CONFIG_FILE" ]; then
     echo "Config file $CONFIG_FILE not found! Can not continue!"
-    exit 1
+    exit 0
   fi
 }
 

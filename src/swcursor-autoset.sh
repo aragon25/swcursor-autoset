@@ -151,7 +151,7 @@ function cmd_main() {
     done < <(grep -vE '^\s*#' "$f" | sed -n -E 's/^[[:space:]]*include(_if_exists)?[[:space:]]+([^[:space:]]+).*/\2/p')
   done
   if grep -h -iEv '^\s*#' "${files[@]}" 2>/dev/null | sed -E 's/#.*$//' | sed -E 's/[[:space:]]+//g; s/,/ /g' | grep -iE '^[[:space:]]*dtoverlay=vc4-kms-dsi-waveshare-panel' | grep -qiE '(^| )rotation=180( |$)'; then
-    echo "[swcursor-autoset] waveshare-panel + rotation=180 found → add SWcursor-Config"
+    echo "[$SCRIPT_TITLE] waveshare-panel + rotation=180 found → add SWcursor-Config"
     mkdir -p "$TARGET_DIR"
     cat >"$TARGET_FILE" <<'EOF'
 Section "Device"
@@ -161,14 +161,14 @@ Section "Device"
 EndSection
 EOF
   else
-    echo "[swcursor-autoset] No matching Overlay/Rotation found → remove SWcursor-Config if existing"
+    echo "[$SCRIPT_TITLE] No matching Overlay/Rotation found → remove SWcursor-Config if existing"
     mkdir -p "$TARGET_DIR"
     [ -f "$TARGET_FILE" ] && rm -f "$TARGET_FILE"
   fi
 }
 
 function cmd_remove() {
-  echo "[swcursor-autoset] Manual remove triggered → remove SWcursor-Config if existing"
+  echo "[$SCRIPT_TITLE] Manual remove triggered → remove SWcursor-Config if existing"
   mkdir -p "$TARGET_DIR"
   [ -f "$TARGET_FILE" ] && rm -f "$TARGET_FILE"
 }
